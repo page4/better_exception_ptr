@@ -10,7 +10,7 @@
 #include "third_party/MSVC/eh_details.h"
 #include <memory>
 
-namespace stdx::detail {
+namespace std::experimental::detail {
 
 EHExceptionRecord* get_repr(const std::exception_ptr& e_ptr) {
     return reinterpret_cast<const std::shared_ptr<EHExceptionRecord>&>(e_ptr).get();
@@ -65,7 +65,7 @@ std::optional<void*> try_catch(const std::exception_ptr& e_ptr, const std::type_
 
 #include "third_party/libsupc++/unwind-cxx.h"
 
-namespace stdx::detail {
+namespace std::experimental::detail {
 
 void* get_raw_ptr(const std::exception_ptr& e_ptr) {
     // exception_ptr is a void* to exception object.

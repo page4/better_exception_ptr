@@ -4,7 +4,7 @@
 
 #include <exception>
 
-namespace stdx::detail {
+namespace std::experimental::detail {
 
 struct current_exception_tag {};
 struct catch_all_tag {};
@@ -40,9 +40,9 @@ struct ReturnOfImpl<T, void> : public std::result_of<T()> {};
 template <typename T>
 using ReturnOf = typename ReturnOfImpl<T>::type;
 
-} // namespace stdx::detail
+} // namespace std::experimental::detail
 
-namespace stdx {
+namespace std::experimental {
 
 class exception_ptr : public std::exception_ptr {
 public:
@@ -83,9 +83,9 @@ public:
 
         if constexpr(sizeof...(Rest) == 0) {
             return {}; // either false or nullopt.
+        } else {
+            return handle(std::forward<Rest>(rest)...);
         }
-
-        return handle(std::forward<Rest>(rest)...);
     }
 
     bool handle() {
@@ -166,4 +166,4 @@ exception_ptr make_exception_ptr(E e) {
 
 using std::rethrow_exception;
 
-} // namespace stdx
+} // namespace std::experimental
