@@ -155,7 +155,7 @@ public:
     exception_ptr(detail::current_exception_tag) : std::exception_ptr(std::current_exception()) {}
 };
 
-exception_ptr current_exception() {
+static inline exception_ptr current_exception() {
     return exception_ptr(detail::current_exception_tag());
 }
 
